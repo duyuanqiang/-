@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bind,call,apply</title>
+</head>
+<body>
+  <script>
+//this绑定  1默认为window 2 隐式绑定谁调用，指向谁  3 显示绑定 apply bind call  4 new  函数原型赋值给实例的隐式原型
+
+    Function.prototype.hmgBind = function(thisArg,...arg) {
+
+      thisArg = (thisArg === null || thisArg === undefined) ? window : Object(thisArg)     //函数也是对象，所以可以添加属性 
+      thisArg.fn = this
+      thisArg.fn(...arg)
+      delete thisArg.fn
+    }
+    function foo(...num) {
+      console.log(this,...num)
+    }
+    foo.hmgBind(121)
+  </script>
+</body>
+</html>
