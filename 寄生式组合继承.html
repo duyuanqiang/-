@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  //es6继承的原理  父类的引用属性不会被共享   父类的原型方法可以共用 也可以向传参数
+  function createObject(o) {
+    function fn() {}
+    fn.prototype = o;
+    return new fn()
+  }
+  function inherit(sunObject,fatherObject) {
+    sunObject.prototype = createObject(fatherObject.prototype)
+    Object.defineProperty(sunObject.prototype,"constructor",{
+      enumberable: false,
+      configurable:true,
+      writable:true,
+      value:sunObject
+    })
+  }
+  function Person(){}
+  Person.prototype.to = function(){console.log(222)}
+  function Student1(){
+    Person.call(this)
+  }
+  Student1.prototype.form = function(){console.log(1111)}
+  inherit(Student1,Person);
+  
+  </script>
+</body>
+</html>

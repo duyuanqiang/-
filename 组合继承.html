@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //组合继承 子类实例可以用父类的原型方法  可以给父类传参数 父类构造函数的引用属性不会被公用
+    //缺点会调用两次父类的构造函数
+    function Person(){
+      this.name = "hmg"
+      console.log(11)
+    }
+    Person.prototype.to = function(){}
+    function Student(){
+      Person.call(this)
+    }
+    Student.prototype.form = function(){}
+    Student.prototype = new Person()
+    const stu = new Student()
+    console.log(Student)
+
+  </script>
+</body>
+</html>

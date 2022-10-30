@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //优点 可以在子类构造函数中，每个子类都拥有自己的父类属性和方法，父类的引用属性不会被共享
+    //缺点 子类不能访问父类原型上的方法,只能卸载构造函数,每次创建都会初始化.
+    function Person(name){
+      this.info={
+        name:name,
+        age:"18"
+      }
+    }
+    Person.prototype.to = function(){}
+    function Student(name){
+      Person.call(this,name)
+      this.age = 18
+    }
+
+    const instance = new Student("xxx");
+    instance.info.gender = "nan"
+    // instance.to() 访问不到父类原型
+    console.log(instance)
+    const instance2 = new Student("x");
+    console.log(instance2)
+
+  </script>
+</body>
+</html>
